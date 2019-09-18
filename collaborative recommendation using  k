@@ -1,0 +1,18 @@
+from scipy.spatial.distance import hamming
+#lets write a function tocompute k nearest neightbour of active user
+
+#to find the k nearest neighbours of active user first find the distance of active user to all the users
+def nearestneighbours(user,K):
+     #create a user df that contains all users except active user
+     allUsers = pd.DataFrame(usetItemRatingMatrix.index)
+     allUsers = allUsers[allUsers.user!=user]
+     
+     #Add a column to this df which contains distance of active user to each user
+     allUsers["distance"] = allUsers["user"].apply(lambda x: hamming(userItemRatingMatrix.loc[user],userItemRatingMatrix.loc[x]))
+     KnearestUsers = allUsers.sort_values(["distance"]).ascending=True)["user"][:K]
+     return KnearestUsers
+     
+ #Lets test the functions - Find the 10 nearest neighbours of the active user 204622
+ print(nearestneighbours(204622))
+ 
+ 
